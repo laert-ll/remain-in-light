@@ -28,3 +28,15 @@ bunzip2 models/shape_predictor_68_face_landmarks.dat.bz2
 ## Build and run
 
 Work in progress.
+
+```
+mkdir build && cd build
+cmake ..
+make
+```
+
+Example usage:
+
+```
+./ril ../assets/lena.png
+```
