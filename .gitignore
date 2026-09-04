@@ -10,3 +10,5 @@ models/*.dat.bz2
 
 # Reference and sample images
 assets/*.png
+assets/*.jpg
+
