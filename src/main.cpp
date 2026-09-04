@@ -7,14 +7,18 @@ int main(int argc, char **argv) {
   const std::string MODEL_PATH =
       std::string(PROJECT_ROOT) +
       "/models/shape_predictor_68_face_landmarks.dat";
-  const std::string OUTPUT_PATH =
-      std::string(PROJECT_ROOT) + "output/output.png";
+  const std::string OUTPUT_PATH_SHAPE =
+      std::string(PROJECT_ROOT) + "/output/output_shape.png";
+  const std::string OUTPUT_PATH_BLUE_TINT =
+      std::string(PROJECT_ROOT) + "/output/output_blue_tint.png";
 
   auto img = load_image(argv[1]);
 
   auto shape = detect_landmarks(img, MODEL_PATH);
 
-  output_debug(img, shape, OUTPUT_PATH);
+  output_debug(img, shape, OUTPUT_PATH_SHAPE);
+
+  blue_tint(img, OUTPUT_PATH_BLUE_TINT);
 
   return 0;
 }

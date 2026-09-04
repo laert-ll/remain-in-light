@@ -48,3 +48,16 @@ void output_debug(const cv::Mat &img, const dlib::full_object_detection &shape,
   }
   cv::imwrite(output_path, img);
 }
+
+void blue_tint(const cv::Mat &img, const std::string &output_path) {
+
+  cv::Mat gray, gray_bgr, tinted;
+  cv::cvtColor(img, gray, cv::COLOR_BGR2GRAY);
+  cv::cvtColor(gray, gray_bgr, cv::COLOR_GRAY2BGR);
+
+  cv::applyColorMap(gray, tinted, cv::COLORMAP_OCEAN);
+  cv::addWeighted(tinted, 0.95, gray_bgr, 0.05, 0, tinted);
+  tinted.convertTo(tinted, -1, 0.6, 68);
+
+  cv::imwrite(output_path, tinted);
+}

@@ -12,3 +12,5 @@ dlib::full_object_detection detect_landmarks(const cv::Mat &img,
 
 void output_debug(const cv::Mat &img, const dlib::full_object_detection &shape,
                   const std::string &output_path);
+
+void blue_tint(const cv::Mat &img, const std::string &output_path);
