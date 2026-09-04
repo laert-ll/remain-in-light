@@ -1,0 +1,12 @@
+# Build output
+build/
+
+# Generated images
+output/
+
+# Landmark model
+models/*.dat
+models/*.dat.bz2
+
+# Reference and sample images
+assets/*.png
