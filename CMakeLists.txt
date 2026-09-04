@@ -10,3 +10,5 @@ find_package(dlib REQUIRED)
 
 add_executable(ril src/image_processing.cpp src/main.cpp)
 target_link_libraries(ril PRIVATE ${OpenCV_LIBS} dlib::dlib)
+
+target_compile_definitions(ril PRIVATE PROJECT_ROOT="${CMAKE_SOURCE_DIR}")
