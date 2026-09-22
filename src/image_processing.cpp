@@ -1,8 +1,9 @@
 #include <iostream>
 
+#include <dlib/array2d.h>
 #include <dlib/image_processing.h>
 #include <dlib/image_processing/frontal_face_detector.h>
-#include <dlib/opencv.h>
+#include <dlib/pixel.h>
 #include <opencv2/opencv.hpp>
 
 using namespace std;
@@ -18,6 +19,19 @@ cv::Mat load_image(char *input_image) {
   return img;
 }
 
+static dlib::array2d<dlib::rgb_pixel> to_dlib(const cv::Mat &bgr) {
+  dlib::array2d<dlib::rgb_pixel> out(bgr.rows, bgr.cols);
+  for (int r = 0; r < bgr.rows; ++r) {
+    const cv::Vec3b *row = bgr.ptr<cv::Vec3b>(r);
+    for (int c = 0; c < bgr.cols; ++c) {
+      out[r][c].blue = row[c][0];
+      out[r][c].green = row[c][1];
+      out[r][c].red = row[c][2];
+    }
+  }
+  return out;
+}
+
 dlib::full_object_detection detect_landmarks(const cv::Mat &img,
                                              const std::string &model_path) {
 
@@ -26,7 +40,7 @@ dlib::full_object_detection detect_landmarks(const cv::Mat &img,
   dlib::shape_predictor sp;
   dlib::deserialize(model_path) >> sp;
 
-  dlib::cv_image<dlib::bgr_pixel> dimg(img);
+  dlib::array2d<dlib::rgb_pixel> dimg = to_dlib(img);
 
   std::vector<dlib::rectangle> faces = face_detector(dimg);
 
